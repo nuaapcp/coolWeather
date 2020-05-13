@@ -18,7 +18,10 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven {
+            //使用公司nexus镜像，加速下载依赖
+            url 'http://10.20.10.239:8081/repository/maven-public/'
+        }
     }
 }
 
