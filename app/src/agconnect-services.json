@@ -1,0 +1,30 @@
+{
+  "agcgw": {
+    "backurl": "connect-drcn.dbankcloud.cn",
+    "url": "connect-drcn.hispace.hicloud.com"
+  },
+  "client": {
+    "cp_id": "200086000123231384",
+    "product_id": "736430079244523691",
+    "client_id": "388952674449490944",
+    "client_secret": "0BF0B3429134E965B5F38FC3058A64569308CFACA04E08CB4653360F158DAB97",
+    "app_id": "102436051",
+    "package_name": "com.test.coolweather",
+    "api_key": "CV8VTJsrrbSZ/7WvvrzZf/3iCVFNNU4xWxsUFhfLzl5dVIJt0qSnHKPMya7WuDFWfe+B7Wa3u3NQzoYJZgrvDOlGrefU"
+  },
+  "service": {
+    "analytics": {
+      "collector_url": "datacollector-drcn.dt.hicloud.com,datacollector-drcn.dt.dbankcloud.cn",
+      "resource_id": "p1",
+      "channel_id": ""
+    },
+    "cloudstorage": {
+      "storage_url": "https://agc-storage-drcn.platform.dbankcloud.cn"
+    },
+    "ml": {
+      "mlservice_url": "ml-api-drcn.ai.dbankcloud.com,ml-api-drcn.ai.dbankcloud.cn"
+    }
+  },
+  "region": "CN",
+  "configuration_version": "1.0"
+}
