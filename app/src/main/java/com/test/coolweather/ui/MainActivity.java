@@ -21,27 +21,35 @@ import com.test.coolweather.MyApplication;
 import com.test.coolweather.R;
 import com.test.coolweather.dataBase.AppDataBase;
 import com.test.coolweather.dataBase.entity.LocationInfoCN;
+import com.test.coolweather.test.Truck;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
+@AndroidEntryPoint
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private static final int PERMISSION_REQUEST = 1;
     String[] permissions = new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_SMS};
     List<String> mPermissionList = new ArrayList<>();
+    @Inject
+    public Truck truck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initPermission();
+        truck.deliver();
+//        initPermission();
         init();
 //        LocationInfoCN locationInfoCN = AppDataBase.getAppDatabase(MyApplication.getAppContext()).locationDAO().getLocation("南京","浦口");
 //        Log.d(TAG, "onCreate: 南京浦口的经纬度是：lng:"+locationInfoCN.getLng()+" lat:"+locationInfoCN.getLat());

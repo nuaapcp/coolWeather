@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.huawei.agconnect'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
@@ -20,6 +22,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    //JAVA 8
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -40,7 +48,7 @@ dependencies {
     //room框架
     implementation 'androidx.room:room-runtime:2.2.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    annotationProcessor 'androidx.room:room-compiler:2.2.5'
+    kapt 'androidx.room:room-compiler:2.2.5'
     // Retrofit 网络请求
     api 'com.squareup.retrofit2:retrofit:2.6.1'
     api 'com.squareup.retrofit2:converter-gson:2.6.1'
@@ -48,6 +56,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
+    // Hilt依赖注入框架
+    implementation "com.google.dagger:hilt-android:2.28-alpha"
+    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
 
     implementation group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6.12'
     implementation 'com.huawei.hms:push:4.0.4.301'
