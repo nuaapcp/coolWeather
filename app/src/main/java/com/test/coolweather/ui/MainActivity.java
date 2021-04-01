@@ -2,7 +2,9 @@ package com.test.coolweather.ui;
 
 
 import android.Manifest;
+import android.app.KeyguardManager;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -50,9 +52,17 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         truck.deliver();
 //        initPermission();
-        init();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                init();
+            }
+        }).start();
 //        LocationInfoCN locationInfoCN = AppDataBase.getAppDatabase(MyApplication.getAppContext()).locationDAO().getLocation("南京","浦口");
 //        Log.d(TAG, "onCreate: 南京浦口的经纬度是：lng:"+locationInfoCN.getLng()+" lat:"+locationInfoCN.getLat());
+        KeyguardManager keyguardManager = (KeyguardManager) this.getSystemService(Context.KEYGUARD_SERVICE);
+        boolean deviceSecure = keyguardManager.isDeviceSecure();
+        Log.d(TAG, "onCreate: deviceSecure = " + deviceSecure);
     }
 
     private void init() {

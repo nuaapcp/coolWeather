@@ -1,8 +1,10 @@
 package com.test.coolweather.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.test.coolweather.MyApplication;
@@ -108,6 +111,14 @@ public class ChooseAreaFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Button button = view.findViewById(R.id.get_package);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), GetPackageInfoActivity.class);
+                startActivity(intent);
+            }
+        });
         areaListAdapter.notifyDataSetChanged();
         commonTitleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
             @Override
@@ -121,6 +132,21 @@ public class ChooseAreaFragment extends Fragment {
                     } else if (currentLevel == LEVEL_CITY) {
                         queryAreaList(LEVEL_PROVINCE, "中国");
                     }
+                }
+            }
+        });
+        getActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (currentLevel == LEVEL_COUNTY) {
+                    String belongCity = commonTitleBar.getCenterTextView().getText().toString();
+                    int belongProvinceId = AppDataBase.getAppDatabase(MyApplication.getAppContext()).cityDAO().getCityByName(belongCity).getProvinceId();
+                    String belongProvinceName = AppDataBase.getAppDatabase(MyApplication.getAppContext()).provinceDAO().getProvinceName(belongProvinceId);
+                    queryAreaList(LEVEL_CITY, belongProvinceName);
+                } else if (currentLevel == LEVEL_CITY) {
+                    queryAreaList(LEVEL_PROVINCE, "中国");
+                } else if (currentLevel == LEVEL_PROVINCE) {
+                    getActivity().finish();
                 }
             }
         });

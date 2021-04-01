@@ -4,15 +4,13 @@ package com.test.coolweather.ui
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.IOException
-import java.lang.IndexOutOfBoundsException
+import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
 
 fun main() {
-    getSms().forEach {
-        praseSms(it)
-    }
-//    testTime()
+    val vURI = URI("ssl://112.86.228.194:8883/")
+    print(vURI.path)
 }
 
 /**
